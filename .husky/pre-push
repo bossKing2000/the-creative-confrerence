@@ -1,0 +1,4 @@
+echo "🏗️  Running build..."
+npm run build
+
+echo "✅ Pre-push checks passed!"

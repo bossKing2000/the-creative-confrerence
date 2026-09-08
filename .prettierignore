@@ -1,0 +1,4 @@
+**/build
+**/public
+**/.next
+pnpm-lock.yaml

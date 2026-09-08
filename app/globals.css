@@ -1,0 +1,166 @@
+@import 'tailwindcss';
+
+/* ------------------------------------------------------------------
+   The Creative Conference 2026 — "Ash & Bone"
+
+   Zero chroma. Black canvas, ash mid-tones, warm bone highlight.
+   Contrast and typography carry the whole design, which is what keeps
+   it from competing with the logo, the sponsor marks or photography.
+   ------------------------------------------------------------------ */
+
+@theme {
+  /* Surfaces — near-black through to card grey. */
+  --color-ink: #0b0b0c;
+  --color-char: #141416;
+  --color-smoke: #1e1e21;
+
+  /* Type — raw ash through to warm bone. */
+  --color-ash-dim: #5c5c65;
+  --color-ash: #8a8a93;
+  --color-silver: #c9c9d1;
+  --color-bone: #f4f1ea;
+
+  /* Motion */
+  --animate-marquee: marquee 45s linear infinite;
+  --animate-marquee-slow: marquee 70s linear infinite;
+}
+
+@theme inline {
+  --font-display: var(--font-bricolage);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@keyframes marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@layer base {
+  html {
+    /* Page scrolling is the browser's own — no scroll-hijacking library.
+       `scroll-padding-top` clears the fixed header so anchor targets do not
+       land underneath it. */
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    background-color: var(--color-ink);
+    color: var(--color-ash);
+    font-family: var(--font-sans), system-ui, sans-serif;
+    /* `clip`, not `hidden`: `hidden` turns body into a scroll container,
+       which would break any position:sticky inside it. */
+    overflow-x: clip;
+  }
+
+  h1,
+  h2,
+  h3 {
+    color: var(--color-bone);
+    font-family: var(--font-display), var(--font-sans), sans-serif;
+    letter-spacing: -0.035em;
+    text-wrap: balance;
+  }
+
+  ::selection {
+    background-color: var(--color-bone);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-bone);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  input,
+  textarea,
+  button,
+  select {
+    font: inherit;
+    color: inherit;
+  }
+}
+
+@utility seam {
+  /* The stitch line where two woven strips meet. */
+  border-color: color-mix(in oklab, var(--color-bone) 10%, transparent);
+}
+
+@utility shell {
+  /* Shared page gutter, so section seams line up down the whole page. */
+  width: 100%;
+  max-width: 80rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+
+  @media (width >= 48rem) {
+    padding-inline: 2rem;
+  }
+
+  @media (width >= 80rem) {
+    padding-inline: 2.5rem;
+  }
+}
+
+/* Elements GSAP reveals start hidden — but only where scripting can reveal
+   them again and motion is welcome. Content is never left invisible. */
+@media (prefers-reduced-motion: no-preference) and (scripting: enabled) {
+  .js-reveal {
+    opacity: 0;
+  }
+}
+
+/* SplitText masks each line in its own clipping box. Without this the
+   descenders of a rising line get shaved off. */
+.split-line-mask {
+  padding-bottom: 0.08em;
+}
+
+/* The lineup track is a wrapping grid by default and only becomes a single
+   horizontal row once the pinned scroll effect has actually been created.
+   Baking the row into the markup would strand the later cards outside an
+   `overflow-hidden` section whenever the effect does not run — no JS, reduced
+   motion, or below the breakpoint. */
+[data-track='horizontal'] {
+  display: flex;
+  width: max-content;
+  flex-wrap: nowrap;
+}
+
+[data-track='horizontal'] > * {
+  flex: 0 0 auto;
+  width: 20rem;
+}
+
+/* The team grid collapses into a stacked deck for exactly one frame, so Flip
+   can record it as the "from" state before dealing the cards back out. It is
+   never painted in this state and never applied without JS. */
+[data-deck='stacked'] > * {
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  margin-inline: auto;
+  width: min(18rem, 100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
