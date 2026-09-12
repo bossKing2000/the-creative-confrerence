@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   description,
   applicationName: title,
   manifest: '/site.webmanifest',
-  keywords: ['design conference', 'creative conference', 'Lagos', 'Nigeria', 'Africa', 'designers', 'creatives'],
+  keywords: ['design conference', 'creative conference', 'Ogbomosho', 'Nigeria', 'Africa', 'designers', 'creatives'],
   openGraph: {
     title: `${title} · ${event.city}`,
     description,

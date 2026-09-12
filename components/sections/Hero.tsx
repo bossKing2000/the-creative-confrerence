@@ -36,13 +36,22 @@ export function Hero() {
           delay={0.15}
           className="mx-auto mt-8 max-w-5xl text-[clamp(2.5rem,7.5vw,5.75rem)] leading-[0.95] font-semibold text-balance"
         >
-          Bring the work. Leave with better work.
+          CTRL + Z
+        </SplitReveal>
+
+        <SplitReveal
+          as="h1"
+          trigger="load"
+          delay={0.15}
+          className="mx-auto mt-8 max-w-5xl text-[clamp(2.5rem,7.5vw,5.75rem)] leading-[0.95] font-semibold text-balance"
+        >
+          PAUSE, UNDO, REBUILD .
         </SplitReveal>
 
         <LoadSequence delay={0.75}>
           <p className="js-reveal mx-auto mt-7 max-w-2xl text-base leading-relaxed text-ash sm:text-lg" data-load>
-            A one-day gathering for designers, writers, developers and founders across Africa. Built around live
-            critique, honest process talk and the people who can move your craft forward.
+            CTRL Z PAUSE! UNDO! REBUILD! A one-gathering for creatives across Africa to rethink their process,challenge
+            the familiar and create what comes next
           </p>
 
           <div className="js-reveal mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row" data-load>

@@ -28,12 +28,12 @@ export const event = {
 
   // PLACEHOLDER — drives the hero countdown. Must stay a parseable ISO
   // timestamp with an offset, or the countdown will render its empty state.
-  startsAt: '2026-11-07T09:00:00+01:00',
-  dateLabel: 'Saturday, 7 November 2026',
+  startsAt: '2026-11-21T09:00:00+01:00',
+  dateLabel: 'Saturday, 21 November 2026',
   timeLabel: '9:00 AM WAT',
 
-  venue: 'Venue to be announced', // PLACEHOLDER
-  city: 'Lagos, Nigeria',
+  venue: 'The Assembly', // PLACEHOLDER
+  city: 'Ogbomosho, Nigeria',
 
   // PLACEHOLDER — replace with the full tix.africa event URL, not the bare domain.
   ticketUrl: 'https://tix.africa',
@@ -52,24 +52,24 @@ export const socials: SocialLink[] = [
 ];
 
 export const stats: EventStat[] = [
-  { value: 2000, suffix: '+', label: 'Creatives in the room' },
+  { value: 1000, suffix: '+', label: 'Creatives in the room' },
   { value: 25, suffix: '+', label: 'Speakers and mentors' },
   { value: 12, suffix: '', label: 'Sessions and workshops' },
-  { value: 3, suffix: '', label: 'Editions since 2024' },
+  { value: 3, suffix: '', label: 'Editions since 2023' },
 ];
 
 export const archives: Archive[] = [
   {
-    year: '2024',
-    title: 'The first room',
+    year: '2023',
+    title: 'Creative connect',
     summary:
       'The edition that proved the point: a room full of designers who had only ever met in group chats, finally in the same place. Portfolio reviews ran past their slot and nobody left.',
     href: 'https://drive.google.com/drive/folders/1Iu4tlEay-5T5z3hapchoHjGnbbroLk3H',
     highlights: ['Portfolio clinics', 'First-time speakers', 'Community launch'],
   },
   {
-    year: '2025',
-    title: 'Wider circles',
+    year: '2024',
+    title: 'Fostering creativity within africas community',
     summary:
       'Twice the attendance and a lineup that reached beyond design into product, engineering and the business of creative work. The year the hallway track became the best track.',
     href: 'https://drive.google.com/drive/u/1/folders/1QE3CzDPI54iUB00HLtnoMUpTX4hNk2Hi',
@@ -77,8 +77,8 @@ export const archives: Archive[] = [
   },
 
   {
-    year: '2026',
-    title: 'The year of the creative conference',
+    year: '2025',
+    title: 'RISE - reinvent , inspire, solve , evolve',
     summary:
       'Triple the attendance and a lineup that reached beyond design into product, engineering and the business of creative work. The year the hallway track became the best track.',
     href: 'https://drive.google.com/drive/u/1/folders/1QE3CzDPI54iUB00HLtnoMUpTX4hNk2Hi',
@@ -97,14 +97,14 @@ export const archives: Archive[] = [
 export const pillars = [
   {
     title: 'Networking',
-    body: 'Structured introductions, not awkward mingling. You leave with people who can actually move your work forward.',
+    body: 'Connect with potential collaborators & industry experts.',
   },
   {
     title: 'In-depth learning',
-    body: 'Full-length sessions with room for the messy middle — the decisions, the rejected directions, the things that did not work.',
+    body: 'Gain practical insights from professionals who have worked on real projects, solved real problems & build successful careers.Walk away with lessons you can apply to your own creative journey.',
   },
   {
     title: 'Interactive sessions',
-    body: 'Live critiques, hands-on workshops and design challenges. You build something before the day is out.',
+    body: 'Beyond listening, take part in engaging conversations,life critique and thoughtful discussion, ask, questions, share ideas and learn through real time interaction. ',
   },
 ];
