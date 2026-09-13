@@ -11,44 +11,37 @@ export interface Person {
   socials?: SocialLink[];
 }
 
-export const speakers: Person[] = [
+export const speakers: Person[] = [];
+
+export const team: Person[] = [
   {
     id: 'dammy',
     name: 'Dammy',
-    role: 'Speaker',
+    role: 'Organising team',
     photo: '/images/team/Dammy.jpg',
   },
   {
     id: 'damola',
     name: 'Damola',
-    role: 'Speaker',
+    role: 'Organising team',
     photo: '/images/team/Damola.jpg',
   },
   {
     id: 'peter',
     name: 'Peter',
-    role: 'Speaker',
+    role: 'Organising team',
     photo: '/images/team/Peter.jpg',
   },
   {
     id: 'segun',
     name: 'Segun',
-    role: 'Speaker',
+    role: 'Organising team',
     photo: '/images/team/Segun.jpg',
   },
   {
     id: 'tigbemiga',
     name: 'Tigbemiga',
-    role: 'Speaker',
+    role: 'Organising team',
     photo: '/images/team/Tigbemiga.jpg',
   },
-];
-
-export const team: Person[] = [
-  { id: 'convener', name: 'To be announced', role: 'Convener', pending: true },
-  { id: 'programme', name: 'To be announced', role: 'Programme lead', pending: true },
-  { id: 'partnerships', name: 'To be announced', role: 'Partnerships lead', pending: true },
-  { id: 'design', name: 'To be announced', role: 'Design lead', pending: true },
-  { id: 'community', name: 'To be announced', role: 'Community manager', pending: true },
-  { id: 'operations', name: 'To be announced', role: 'Operations lead', pending: true },
 ];

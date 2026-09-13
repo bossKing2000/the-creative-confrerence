@@ -1,10 +1,7 @@
+import { PersonCard } from '@/components/ui/PersonCard';
 import { Reveal } from '@/components/ui/Reveal';
 import { SplitReveal } from '@/components/ui/SplitReveal';
 import { team } from '@/data/people';
-
-function pad2(n: number) {
-  return String(n).padStart(2, '0');
-}
 
 export function Team() {
   return (
@@ -32,25 +29,18 @@ export function Team() {
           </Reveal>
         </div>
 
+        {/* Same card container, grid and image treatment the speaker cards
+            used — the five organising-team photographs render here. */}
         <Reveal className="mt-14" delay={0.1}>
-          <ol className="overflow-hidden rounded-2xl border seam">
-            {team.map((person, index) => (
-              <li
-                key={person.id}
-                className="flex items-baseline gap-5 border-b seam bg-char/60 px-6 py-5 transition-colors duration-300 last:border-b-0 hover:bg-white/2 sm:px-8 lg:px-10"
-              >
-                <span aria-hidden className="shrink-0 font-mono text-xs tracking-[0.18em] text-ash-dim tabular-nums">
-                  {pad2(index + 1)}
-                </span>
-                <div className="flex min-w-0 flex-1 flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
-                  <p className="font-display text-xl font-semibold tracking-tight text-bone lg:text-2xl">
-                    {person.name}
-                  </p>
-                  <p className="shrink-0 text-sm text-ash">{person.role}</p>
+          <div className="rounded-2xl bg-bone/10 p-5 lg:p-8">
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {team.map(person => (
+                <div key={person.id}>
+                  <PersonCard person={person} />
                 </div>
-              </li>
-            ))}
-          </ol>
+              ))}
+            </div>
+          </div>
         </Reveal>
       </div>
     </section>

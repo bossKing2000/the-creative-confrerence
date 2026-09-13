@@ -5,10 +5,16 @@ import { ArrowUpRight } from '@/components/ui/Icon';
 import { PersonCard } from '@/components/ui/PersonCard';
 import { Reveal } from '@/components/ui/Reveal';
 import { SectionHeading } from '@/components/ui/SectionHeading';
-import { speakers } from '@/data/people';
+import { speakers, type Person } from '@/data/people';
 
 export function Speakers() {
   const confirmed = speakers.filter(person => !person.pending).length;
+  // Speaker photographs are not available yet, so the lineup grid holds a
+  // single pending placeholder. No organising-team imagery is rendered here.
+  const lineup: Person[] =
+    speakers.length > 0
+      ? speakers
+      : [{ id: 'lineup-tba', name: 'To be announced', role: 'Speaker lineup', pending: true }];
 
   return (
     <section id="speakers" className="py-24 lg:py-28">
@@ -31,7 +37,7 @@ export function Speakers() {
       <div className="mt-10 lg:mt-12">
         <div className="shell rounded-2xl bg-bone/10 p-5 lg:p-8">
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {speakers.map(person => (
+            {lineup.map(person => (
               <div key={person.id}>
                 <PersonCard person={person} />
               </div>
