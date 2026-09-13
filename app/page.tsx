@@ -7,8 +7,10 @@ import { Speakers } from '@/components/sections/Speakers';
 import { Sponsors } from '@/components/sections/Sponsors';
 import { Team } from '@/components/sections/Team';
 import { Ticker } from '@/components/sections/Ticker';
+import { Tickets } from '@/components/sections/Tickets';
 import { event } from '@/data/event';
 import { faqs } from '@/data/faqs';
+import { tickets } from '@/data/tickets';
 
 function StructuredData() {
   const schema = {
@@ -19,6 +21,7 @@ function StructuredData() {
         name: `${event.name} ${event.edition}`,
         description: event.tagline,
         startDate: event.startsAt,
+        url: event.ticketUrl,
         eventStatus: 'https://schema.org/EventScheduled',
         eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
         location: {
@@ -26,7 +29,15 @@ function StructuredData() {
           name: event.venue,
           address: { '@type': 'PostalAddress', addressLocality: 'Lagos', addressCountry: 'NG' },
         },
-        offers: { '@type': 'Offer', url: event.ticketUrl, availability: 'https://schema.org/InStock' },
+        // One Offer per ticket type so structured data reflects the real
+        // checkout destinations. The event-level URL stays on event.ticketUrl
+        // (the EventPadi event page), never a #tickets fragment.
+        offers: tickets.map(ticket => ({
+          '@type': 'Offer',
+          name: ticket.name,
+          url: ticket.href,
+          availability: 'https://schema.org/InStock',
+        })),
       },
       {
         '@type': 'FAQPage',
@@ -54,6 +65,7 @@ export default function Home() {
       <Sponsors />
       <Team />
       <FAQ />
+      <Tickets />
       <FinalCTA />
     </>
   );

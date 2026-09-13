@@ -13,27 +13,35 @@ export interface Person {
 
 export const speakers: Person[] = [
   {
-    id: 'oyeleye-ogunsanya',
-    name: 'Oyeleye Ogunsanya',
-    role: 'Lead Designer',
-    company: 'Risevest',
-    socials: [],
-  },
-  {
-    id: 'tola-alabi',
-    name: 'Tola Alabi',
-    role: 'Design Coach & Speaker',
-    socials: [],
-  },
-  {
-    id: 'oluwabusayo-charles',
-    name: 'Oluwabusayo A. Charles',
+    id: 'dammy',
+    name: 'Dammy',
     role: 'Speaker',
-    socials: [],
+    photo: '/images/team/Dammy.jpg',
   },
-  { id: 'slot-4', name: 'To be announced', role: 'Keynote', pending: true },
-  { id: 'slot-5', name: 'To be announced', role: 'Workshop lead', pending: true },
-  { id: 'slot-6', name: 'To be announced', role: 'Panel', pending: true },
+  {
+    id: 'damola',
+    name: 'Damola',
+    role: 'Speaker',
+    photo: '/images/team/Damola.jpg',
+  },
+  {
+    id: 'peter',
+    name: 'Peter',
+    role: 'Speaker',
+    photo: '/images/team/Peter.jpg',
+  },
+  {
+    id: 'segun',
+    name: 'Segun',
+    role: 'Speaker',
+    photo: '/images/team/Segun.jpg',
+  },
+  {
+    id: 'tigbemiga',
+    name: 'Tigbemiga',
+    role: 'Speaker',
+    photo: '/images/team/Tigbemiga.jpg',
+  },
 ];
 
 export const team: Person[] = [

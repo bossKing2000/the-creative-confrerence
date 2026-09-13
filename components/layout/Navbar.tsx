@@ -110,7 +110,7 @@ export function Navbar() {
 
         <div className="flex items-center gap-2">
           <div className="hidden sm:block">
-            <Button href={event.ticketUrl} size="md">
+            <Button href="#tickets" size="md">
               Get your ticket
               <ArrowUpRight className="size-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </Button>
@@ -156,7 +156,7 @@ export function Navbar() {
         </ul>
 
         <div className="shell pb-8 sm:hidden">
-          <Button href={event.ticketUrl} size="lg" className="w-full">
+          <Button href="#tickets" size="lg" className="w-full">
             Get your ticket
             <ArrowUpRight className="size-4" />
           </Button>

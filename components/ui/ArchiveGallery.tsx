@@ -58,7 +58,7 @@ export function ArchiveGallery({ photos, year, href }: ArchiveGalleryProps) {
   if (photos.length === 0) return null;
 
   return (
-    <div key={year} className="archive-lead mt-10 space-y-2 lg:mt-12 lg:space-y-3">
+    <div key={year} className="archive-film archive-lead mt-10 space-y-2 lg:mt-12 lg:space-y-3">
       <Row photos={photos} year={year} href={href} direction="left" />
       <Row photos={[...photos].reverse()} year={year} href={href} direction="right" />
     </div>

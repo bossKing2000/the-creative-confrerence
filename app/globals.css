@@ -53,6 +53,18 @@
   }
 }
 
+/* Marquee pause on interaction. Explicit selectors (not stacked Tailwind
+   variants) so hover and keyboard focus reliably still the drift. Scoped to
+   no-preference; reduced motion kills the underlying animations globally. */
+@media (prefers-reduced-motion: no-preference) {
+  .marquee:hover > .marquee-track,
+  .marquee:focus-within > .marquee-track,
+  .archive-film:hover .marquee-track,
+  .archive-film:focus-within .marquee-track {
+    animation-play-state: paused;
+  }
+}
+
 @layer base {
   html {
     /* Page scrolling is the browser's own — no scroll-hijacking library.
@@ -136,8 +148,7 @@
   padding-bottom: 0.08em;
 }
 
-/* Past Editions year-switch entrance — "The Spread". Editorial leads, images
-   follow with a short stagger. Opacity and translate only, one shot per
+/* Past Editions year-switch entrance. Opacity and translate only, one shot per
    mount. Base states are fully visible, so reduced-motion environments (and
    anything without animation support) show the new edition immediately
    instead of hiding it. */
@@ -156,60 +167,12 @@
   .archive-lead {
     animation: archive-enter 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
   }
-
-  .archive-enter-item {
-    opacity: 0;
-    animation: archive-enter 380ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  }
-
-  /* Cinematic filmstrip. Transform/opacity/scale are compositor-only; the
-     track moves in one 600ms glide, frames settle in 550ms. Each step is one
-     slide unit: translateX % resolves against the track element (= viewport
-     width), so the step matches the slide widths below (78% / 72%). */
-  .film-track {
-    --film-step: 78%;
-    transform: translateX(calc(var(--film-i, 0) * -1 * var(--film-step)));
-    transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  @media (width >= 64rem) {
-    .film-track {
-      --film-step: 72%;
-    }
-  }
-
-  .film-frame {
-    transition:
-      opacity 550ms cubic-bezier(0.22, 1, 0.36, 1),
-      scale 550ms cubic-bezier(0.22, 1, 0.36, 1),
-      border-color 300ms ease-out;
-  }
-
-  .film-progress {
-    transition: width 600ms cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  /* Hover zoom lives here (not in Tailwind classes) so reduced motion also
-     disables it without fragile utility overrides. Dominant frame only. */
-  .archive-zoom {
-    transition: transform 500ms ease-out;
-  }
-
-  .film-dominant:hover .archive-zoom {
-    transform: scale(1.03);
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  /* Instant everything: no slide, no entrance, no zoom. Frames keep their
-     dominant/neighbor opacity so continuation stays readable. */
-  .film-track,
-  .film-frame,
-  .film-progress,
-  .archive-zoom,
-  .archive-lead,
-  .archive-enter-item {
-    transition: none;
+  /* Instant everything: no entrance, no marquee drift. The archive rows sit
+     still as a static photographic record. */
+  .archive-lead {
     animation: none;
   }
 }

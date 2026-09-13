@@ -8,8 +8,8 @@ export function About() {
     <section id="about" className="shell py-24 lg:py-32">
       <SectionHeading
         eyebrow="What this is"
-        title="Fostering Innovation within Africa's Creative Community."
-        lede="The Creative Conference is dedicated to bringing a confluence of creatives from various discipline with professional and social objectives to enhance a unified community."
+        title="Fostering creativity within Africa's design community"
+        lede="Three editions in, the format has settled into something simple: fewer talks, more work. You come with something you are making, and you leave with sharper thinking about it."
       />
 
       <Reveal

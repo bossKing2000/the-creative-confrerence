@@ -8,7 +8,7 @@ import { event } from '@/data/event';
 
 export function FinalCTA() {
   return (
-    <section id="tickets" className="relative isolate overflow-hidden border-t seam">
+    <section className="relative isolate overflow-hidden border-t seam">
       <StripField intensity={22} parallax={-70} className="-z-10" />
 
       <div className="shell relative py-28 text-center lg:py-36">
@@ -30,7 +30,7 @@ export function FinalCTA() {
           </p>
 
           <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-            <Button href={event.ticketUrl} size="lg" className="w-full sm:w-auto">
+            <Button href="#tickets" size="lg" className="w-full sm:w-auto">
               Get your ticket
               <ArrowUpRight className="size-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </Button>

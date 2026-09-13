@@ -20,9 +20,6 @@ export function PastEditions() {
   // Active-year source of truth: only this year's photo array is ever read,
   // mounted or rendered. Inactive years preload nothing.
   const photoCount = edition.photos.length;
-  // Filmstrip position. Always resets to the first frame when the edition
-  // changes — each year opens on its first curated photograph.
-  const [frame, setFrame] = useState(0);
 
   const total = archives.length;
   const prev = (active + total - 1) % total;
@@ -34,7 +31,6 @@ export function PastEditions() {
 
   function select(index: number) {
     setActive(index);
-    setFrame(0);
   }
 
   function onKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {
@@ -50,7 +46,7 @@ export function PastEditions() {
   }
 
   return (
-    <section id="editions" className="border-y seam bg-char/40 py-24 lg:py-32">
+    <section id="editions" className="overflow-x-clip border-y seam bg-char/40 py-24 lg:py-32">
       <div className="shell">
         <SectionHeading
           eyebrow="Past editions"
@@ -118,57 +114,67 @@ export function PastEditions() {
             </button>
           </div>
         </div>
+      </div>
 
-        <Reveal className="mt-8" delay={0.1}>
-          <div
-            role="tabpanel"
-            id={`${baseId}-panel-${edition.year}`}
-            aria-labelledby={`${baseId}-tab-${edition.year}`}
-            tabIndex={0}
-            className="rounded-2xl border seam bg-char/60 p-7 lg:p-10"
-          >
-            {/* Remounted per year so the lead/follow entrance replays. */}
-            <div key={edition.year}>
-              <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
-                <div className="archive-lead lg:col-span-5">
-                  <p className="font-display text-7xl font-semibold tracking-tight text-bone tabular-nums lg:text-8xl">
-                    {edition.year}
-                  </p>
+      {/* Full-bleed panel: the lead card and footer stay in `.shell`, while
+          the gallery below is a direct full-width child so the marquee runs
+          edge to edge like the reference (same pattern as Ticker). */}
+      <Reveal className="mt-8" delay={0.1}>
+        <div
+          role="tabpanel"
+          id={`${baseId}-panel-${edition.year}`}
+          aria-labelledby={`${baseId}-tab-${edition.year}`}
+          tabIndex={0}
+        >
+          {/* Remounted per year so the entrance replays. */}
+          <div key={edition.year}>
+            <div className="shell">
+              <div className="rounded-2xl border seam bg-char/60 p-7 lg:p-10">
+                <div className="archive-lead grid gap-10 lg:grid-cols-12 lg:gap-12">
+                  <div className="lg:col-span-7">
+                    <p className="font-display text-7xl font-semibold tracking-tight text-bone tabular-nums lg:text-8xl">
+                      {edition.year}
+                    </p>
 
-                  <h3 className="mt-4 font-display text-2xl font-semibold text-bone lg:text-3xl">{edition.title}</h3>
+                    <h3 className="mt-4 font-display text-2xl font-semibold text-bone lg:text-3xl">{edition.title}</h3>
 
-                  <p className="mt-4 max-w-2xl text-base leading-relaxed text-ash">{edition.summary}</p>
+                    <p className="mt-4 max-w-2xl text-base leading-relaxed text-ash">{edition.summary}</p>
 
-                  <p className="mt-6 font-mono text-xs tracking-[0.18em] text-ash-dim uppercase">
-                    {photoCount > 0
-                      ? `${photoCount} moment${photoCount === 1 ? '' : 's'} from ${edition.year}`
-                      : `Photographs from ${edition.year} arriving soon`}
-                  </p>
+                    <p className="mt-6 font-mono text-xs tracking-[0.18em] text-ash-dim uppercase">
+                      {photoCount > 0
+                        ? `${photoCount} moment${photoCount === 1 ? '' : 's'} from ${edition.year}`
+                        : `Photographs from ${edition.year} arriving soon`}
+                    </p>
+                  </div>
 
-                  <ul className="mt-7 flex flex-wrap gap-2">
-                    {edition.highlights.map(highlight => (
-                      <li
-                        key={highlight}
-                        className="rounded-full border seam px-3.5 py-1.5 font-mono text-xs tracking-wide text-ash"
-                      >
-                        {highlight}
-                      </li>
-                    ))}
-                  </ul>
+                  <div className="lg:col-span-5 lg:pt-2">
+                    <ul className="flex flex-wrap gap-2">
+                      {edition.highlights.map(highlight => (
+                        <li
+                          key={highlight}
+                          className="rounded-full border seam px-3.5 py-1.5 font-mono text-xs tracking-wide text-ash"
+                        >
+                          {highlight}
+                        </li>
+                      ))}
+                    </ul>
 
-                  <div className="mt-8">
-                    <Button href={edition.href} variant="secondary">
-                      Open the {edition.year} archive
-                      <ArrowUpRight className="size-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                    </Button>
+                    <div className="mt-8">
+                      <Button href={edition.href} variant="secondary">
+                        Open the {edition.year} archive
+                        <ArrowUpRight className="size-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                      </Button>
+                    </div>
                   </div>
                 </div>
-
-                <div className="lg:col-span-7">
-                  <ArchiveGallery photos={edition.photos} year={edition.year} frame={frame} onFrameChange={setFrame} />
-                </div>
               </div>
+            </div>
 
+            {/* Full-bleed: no `.shell`, no card padding — the marquee tracks
+                run to the viewport edges. */}
+            <ArchiveGallery photos={edition.photos} year={edition.year} href={edition.href} />
+
+            <div className="shell">
               <div className="mt-10 flex items-center justify-between border-t seam pt-6">
                 <button
                   type="button"
@@ -192,8 +198,8 @@ export function PastEditions() {
               </div>
             </div>
           </div>
-        </Reveal>
-      </div>
+        </div>
+      </Reveal>
     </section>
   );
 }

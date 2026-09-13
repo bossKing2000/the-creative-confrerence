@@ -19,8 +19,8 @@ function Logo({ sponsor }: { sponsor: Sponsor }) {
       height={sponsor.height}
       sizes="(min-width: 768px) 12rem, 8rem"
       className={cn(
-        'w-auto object-contain opacity-70 brightness-0 invert transition duration-300',
-        'group-hover/logo:opacity-100 group-hover/logo:brightness-100 group-hover/logo:invert-0',
+        'w-auto object-contain opacity-100 transition duration-300',
+        'group-hover/logo:opacity-70',
         isWide ? 'max-h-8 max-w-36 sm:max-h-9 sm:max-w-40' : 'max-h-20 max-w-28 sm:max-h-24 sm:max-w-32',
       )}
     />

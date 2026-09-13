@@ -55,7 +55,7 @@ export function Hero() {
           </p>
 
           <div className="js-reveal mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row" data-load>
-            <Button href={event.ticketUrl} size="lg" className="w-full sm:w-auto">
+            <Button href="#tickets" size="lg" className="w-full sm:w-auto">
               Get your ticket
               <ArrowUpRight className="size-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </Button>

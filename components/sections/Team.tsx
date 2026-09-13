@@ -1,112 +1,57 @@
-'use client';
-
-import { useRef } from 'react';
-
-import { PersonCard } from '@/components/ui/PersonCard';
-import { SectionHeading } from '@/components/ui/SectionHeading';
+import { Reveal } from '@/components/ui/Reveal';
+import { SplitReveal } from '@/components/ui/SplitReveal';
 import { team } from '@/data/people';
-import { Flip, gsap, ScrollTrigger, useGSAP } from '@/lib/gsap';
-import { prefersReducedMotion } from '@/lib/motion';
 
-const TILT = 7;
+function pad2(n: number) {
+  return String(n).padStart(2, '0');
+}
 
 export function Team() {
-  const grid = useRef<HTMLDivElement>(null);
-
-  useGSAP(
-    () => {
-      const el = grid.current;
-      if (!el || prefersReducedMotion()) return;
-
-      const cards = gsap.utils.toArray<HTMLElement>('[data-card]', el);
-      if (cards.length === 0) return;
-
-      const cleanups: (() => void)[] = [];
-
-      const deal = () => {
-        const settledHeight = el.getBoundingClientRect().height;
-        el.style.minHeight = `${settledHeight}px`;
-
-        el.dataset.deck = 'stacked';
-        gsap.set(cards, { rotate: index => (index - (cards.length - 1) / 2) * 4 });
-
-        const state = Flip.getState(cards, { props: 'rotate' });
-
-        delete el.dataset.deck;
-        gsap.set(cards, { rotate: 0 });
-
-        Flip.from(state, {
-          duration: 0.9,
-          ease: 'power3.inOut',
-          absolute: true,
-          stagger: 0.055,
-          // No ScrollTrigger.refresh() here. The deal ends in exactly the
-          // layout it started from, so a refresh buys nothing — and it
-          // recalculates the pinned lineup's spacer above, which shifts the
-          // whole page under anyone who just clicked through to this section.
-          onComplete: () => {
-            el.style.minHeight = '';
-          },
-        });
-      };
-
-      const trigger = ScrollTrigger.create({ trigger: el, start: 'top 78%', once: true, onEnter: deal });
-      cleanups.push(() => trigger.kill());
-
-      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-        cards.forEach(card => {
-          const rotateX = gsap.quickTo(card, 'rotationX', { duration: 0.5, ease: 'power3' });
-          const rotateY = gsap.quickTo(card, 'rotationY', { duration: 0.5, ease: 'power3' });
-          const lift = gsap.quickTo(card, 'y', { duration: 0.5, ease: 'power3' });
-
-          const onMove = (e: PointerEvent) => {
-            const box = card.getBoundingClientRect();
-            // -0.5 .. 0.5 from the card's centre.
-            const px = (e.clientX - box.left) / box.width - 0.5;
-            const py = (e.clientY - box.top) / box.height - 0.5;
-
-            rotateY(px * TILT * 2);
-            rotateX(-py * TILT * 2);
-            lift(-10);
-          };
-
-          const onLeave = () => {
-            rotateX(0);
-            rotateY(0);
-            lift(0);
-          };
-
-          card.addEventListener('pointermove', onMove);
-          card.addEventListener('pointerleave', onLeave);
-
-          cleanups.push(() => {
-            card.removeEventListener('pointermove', onMove);
-            card.removeEventListener('pointerleave', onLeave);
-          });
-        });
-      }
-
-      return () => cleanups.forEach(fn => fn());
-    },
-    { scope: grid },
-  );
-
   return (
     <section id="team" className="border-y seam bg-char/40 py-24 lg:py-32">
       <div className="shell">
-        <SectionHeading
-          eyebrow="Behind it"
-          title="The organising team"
-          lede="A small volunteer team who run this alongside their own practice. If you have a question about the day, one of these people will answer it."
-        />
+        <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
+          <div className="lg:col-span-7">
+            <Reveal>
+              <p className="flex items-center gap-3 font-mono text-xs tracking-[0.2em] text-ash-dim uppercase">
+                <span aria-hidden className="h-px w-6 bg-bone/60" />
+                Behind it
+              </p>
+            </Reveal>
 
-        <div ref={grid} className="mt-14 grid gap-5 perspective-distant sm:grid-cols-2 lg:grid-cols-3">
-          {team.map(person => (
-            <div key={person.id} data-card className="transform-3d will-change-transform">
-              <PersonCard person={person} variant="compact" />
-            </div>
-          ))}
+            <SplitReveal as="h2" className="mt-5 text-4xl leading-[1.05] sm:text-5xl lg:text-6xl">
+              The organising team
+            </SplitReveal>
+          </div>
+
+          <Reveal delay={0.15} className="lg:col-span-5 lg:pt-14">
+            <p className="text-base leading-relaxed text-ash sm:text-lg">
+              A small volunteer team who run this alongside their own practice. If you have a question about the day,
+              one of these people will answer it.
+            </p>
+          </Reveal>
         </div>
+
+        <Reveal className="mt-14" delay={0.1}>
+          <ol className="overflow-hidden rounded-2xl border seam">
+            {team.map((person, index) => (
+              <li
+                key={person.id}
+                className="flex items-baseline gap-5 border-b seam bg-char/60 px-6 py-5 transition-colors duration-300 last:border-b-0 hover:bg-white/2 sm:px-8 lg:px-10"
+              >
+                <span aria-hidden className="shrink-0 font-mono text-xs tracking-[0.18em] text-ash-dim tabular-nums">
+                  {pad2(index + 1)}
+                </span>
+                <div className="flex min-w-0 flex-1 flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
+                  <p className="font-display text-xl font-semibold tracking-tight text-bone lg:text-2xl">
+                    {person.name}
+                  </p>
+                  <p className="shrink-0 text-sm text-ash">{person.role}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </Reveal>
       </div>
     </section>
   );

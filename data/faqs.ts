@@ -22,7 +22,7 @@ export const faqs: Faq[] = [
   {
     question: 'How do I register?',
     answer:
-      'Tickets are handled on tix.africa — use the "Get your ticket" button anywhere on this page. You will get a confirmation email with your QR code, which is what gets scanned at the door.',
+      'Tickets are handled on EventPadi — scroll to the ticket section below and pick the pass that fits your day. You will get a confirmation email with your QR code, which is what gets scanned at the door.',
   },
   {
     question: 'Will registration close?',
