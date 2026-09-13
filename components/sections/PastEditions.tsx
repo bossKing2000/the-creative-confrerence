@@ -54,7 +54,8 @@ export function PastEditions() {
           lede="Every edition is photographed end to end. The full archives are open — browse the rooms, the sessions and the people."
         />
 
-        {/* Year rail. Sticky (CSS only — no scroll listeners) so the edition
+        {/* Year selector. A minimal mono row — deliberately quiet next to the
+            photography. Sticky (CSS only — no scroll listeners) so the edition
             can be switched without scrolling back up. It lives outside the
             Reveal below because transformed/filtered ancestors break sticky
             positioning. `top-20` clears the fixed h-18 navbar with room. */}
@@ -64,20 +65,8 @@ export function PastEditions() {
             role="tablist"
             aria-label="Past editions"
             onKeyDown={onKeyDown}
-            className="mx-auto flex max-w-xl items-center gap-1 rounded-full border seam bg-ink/85 p-1.5 backdrop-blur-xl"
+            className="flex items-center gap-7"
           >
-            <button
-              type="button"
-              onClick={() => {
-                select(prev);
-                focusTab(prev);
-              }}
-              aria-label={`Show previous edition: ${archives[prev].year}`}
-              className="flex size-11 shrink-0 items-center justify-center rounded-full text-ash transition-colors duration-200 hover:bg-white/6 hover:text-bone"
-            >
-              <ArrowRight className="size-4 rotate-180" />
-            </button>
-
             {archives.map((item, index) => {
               const selected = index === active;
 
@@ -92,26 +81,14 @@ export function PastEditions() {
                   tabIndex={selected ? 0 : -1}
                   onClick={() => select(index)}
                   className={cn(
-                    'h-11 min-w-0 flex-1 rounded-full font-display text-lg font-semibold tracking-tight tabular-nums transition-colors duration-300',
-                    selected ? 'bg-bone text-ink' : 'text-ash-dim hover:text-bone',
+                    'min-h-11 border-b pb-1 font-mono text-xs tracking-[0.18em] tabular-nums transition-colors duration-200',
+                    selected ? 'border-bone/60 text-bone' : 'border-transparent text-ash-dim hover:text-bone',
                   )}
                 >
                   {item.year}
                 </button>
               );
             })}
-
-            <button
-              type="button"
-              onClick={() => {
-                select(next);
-                focusTab(next);
-              }}
-              aria-label={`Show next edition: ${archives[next].year}`}
-              className="flex size-11 shrink-0 items-center justify-center rounded-full text-ash transition-colors duration-200 hover:bg-white/6 hover:text-bone"
-            >
-              <ArrowRight className="size-4" />
-            </button>
           </div>
         </div>
       </div>
