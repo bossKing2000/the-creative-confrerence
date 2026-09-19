@@ -28,7 +28,7 @@ export function Avatar({ name, photo, seed, pending, className }: AvatarProps) {
         alt={name}
         width={480}
         height={600}
-        sizes="(min-width: 1024px) 22rem, (min-width: 640px) 45vw, 90vw"
+        sizes="(min-width: 1024px) 352px, (min-width: 640px) 288px, 336px"
         className={cn('h-full w-full object-cover', className)}
       />
     );

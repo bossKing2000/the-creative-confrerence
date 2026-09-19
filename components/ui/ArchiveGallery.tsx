@@ -1,19 +1,22 @@
+'use client';
+
 import Image from 'next/image';
 
 import { Marquee } from '@/components/ui/Marquee';
 import type { ArchivePhoto } from '@/data/event';
+import { useMediaQuery } from '@/lib/media-query';
 
 interface ArchiveGalleryProps {
-  /** Only the active year's photos are ever passed in — nothing is preloaded. */
   photos: ArchivePhoto[];
-  /** Remounts the rows on year change so the drift restarts per edition. */
   year: string;
-  /** Existing archive destination (Google Drive folder) kept for every frame. */
   href: string;
 }
 
-const frame =
-  'group/frame relative mx-2 w-36 shrink-0 overflow-hidden rounded-xl border seam bg-smoke transition-colors duration-300 hover:border-bone/25 sm:w-44 lg:w-56';
+const frameBase =
+  'group/frame relative mx-2 shrink-0 overflow-hidden rounded-xl border seam bg-smoke transition-colors duration-300 hover:border-bone/25';
+const frameMobile = 'w-24';
+const frameTablet = 'sm:w-32';
+const frameDesktop = 'lg:w-40 xl:w-48';
 
 function Row({
   photos,
@@ -26,8 +29,41 @@ function Row({
   href: string;
   direction: 'left' | 'right';
 }) {
+  const prefersReduced = useMediaQuery('(prefers-reduced-motion: reduce)');
+  const speed = prefersReduced ? false : 'slow';
+  const frameClass = `${frameBase} ${frameMobile} ${frameTablet} ${frameDesktop}`;
+
+  if (prefersReduced) {
+    return (
+      <div className="flex gap-2 overflow-x-auto pb-2 -mx-2 px-2 snap-x snap-mandatory">
+        {photos.map(photo => (
+          <a
+            key={photo.src}
+            href={href}
+            target="_blank"
+            rel="noreferrer"
+            aria-label={`${photo.alt} — open the ${year} archive`}
+            className={`${frameClass} flex-shrink-0 snap-center`}
+          >
+            <Image
+              src={photo.src}
+              alt={photo.alt}
+              width={photo.width}
+              height={photo.height}
+              sizes="(min-width: 1024px) 192px, (min-width: 640px) 160px, 96px"
+              loading="lazy"
+              draggable={false}
+              style={{ objectPosition: photo.position ?? '50% 25%' }}
+              className="aspect-[3/4] h-full w-full object-cover"
+            />
+          </a>
+        ))}
+      </div>
+    );
+  }
+
   return (
-    <Marquee speed="slow" direction={direction} className="py-2">
+    <Marquee speed={speed} direction={direction} className="py-2" disableOnMobile>
       {photos.map(photo => (
         <a
           key={photo.src}
@@ -35,14 +71,14 @@ function Row({
           target="_blank"
           rel="noreferrer"
           aria-label={`${photo.alt} — open the ${year} archive`}
-          className={frame}
+          className={frameClass}
         >
           <Image
             src={photo.src}
             alt={photo.alt}
             width={photo.width}
             height={photo.height}
-            sizes="(min-width: 1024px) 14rem, (min-width: 640px) 11rem, 9rem"
+            sizes="(min-width: 1024px) 192px, (min-width: 640px) 160px, 96px"
             loading="lazy"
             draggable={false}
             style={{ objectPosition: photo.position ?? '50% 25%' }}

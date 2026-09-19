@@ -1,24 +1,41 @@
+'use client';
+
 import type { ReactNode } from 'react';
 
+import { useMediaQuery } from '@/lib/media-query';
 import { cn } from '@/lib/utils';
 
 interface MarqueeProps {
   children: ReactNode;
-  speed?: 'default' | 'slow';
+  speed?: 'default' | 'slow' | false;
   direction?: 'left' | 'right';
   fade?: boolean;
   className?: string;
+  disableOnMobile?: boolean;
 }
 
-export function Marquee({ children, speed = 'default', direction = 'left', fade = true, className }: MarqueeProps) {
-  const animation =
-    direction === 'right'
+export function Marquee({
+  children,
+  speed = 'default',
+  direction = 'left',
+  fade = true,
+  className,
+  disableOnMobile = false,
+}: MarqueeProps) {
+  const isMobile = useMediaQuery('(max-width: 639px)');
+  const prefersReduced = useMediaQuery('(prefers-reduced-motion: reduce)');
+
+  const shouldAnimate = !prefersReduced && !(disableOnMobile && isMobile);
+
+  const animation = shouldAnimate
+    ? direction === 'right'
       ? speed === 'slow'
         ? 'animate-marquee-reverse-slow'
         : 'animate-marquee-reverse'
       : speed === 'slow'
         ? 'animate-marquee-slow'
-        : 'animate-marquee';
+        : 'animate-marquee'
+    : undefined;
 
   return (
     <div

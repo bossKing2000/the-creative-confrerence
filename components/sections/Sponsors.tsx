@@ -17,7 +17,7 @@ function Logo({ sponsor }: { sponsor: Sponsor }) {
       alt={sponsor.name}
       width={sponsor.width}
       height={sponsor.height}
-      sizes="(min-width: 768px) 12rem, 8rem"
+      sizes="(min-width: 768px) 192px, 96px"
       className={cn(
         'w-auto object-contain opacity-100 transition duration-300',
         'group-hover/logo:opacity-70',
@@ -55,7 +55,7 @@ export function Sponsors() {
         ))}
       </Reveal>
       <div className="mt-12 sm:hidden">
-        <Marquee speed="slow">
+        <Marquee speed="slow" disableOnMobile>
           {sponsors.map(sponsor => (
             <div key={sponsor.name} className="group/logo flex h-24 items-center justify-center px-7">
               <Logo sponsor={sponsor} />
