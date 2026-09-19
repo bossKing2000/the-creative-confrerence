@@ -35,24 +35,9 @@ export function Hero() {
           delay={0.15}
           className="mx-auto mt-8 max-w-5xl text-[clamp(2.5rem,7.5vw,5.75rem)] leading-[0.95] font-semibold text-balance"
         >
-          Pause the noise.
+          Pause the noise. Undo the defaults. Rebuild with intention.
         </SplitReveal>
-        <SplitReveal
-          as="h1"
-          trigger="load"
-          delay={0.15}
-          className="mx-auto mt-8 max-w-5xl text-[clamp(2.5rem,7.5vw,5.75rem)] leading-[0.95] font-semibold text-balance"
-        >
-          Undo the defaults.
-        </SplitReveal>
-        <SplitReveal
-          as="h1"
-          trigger="load"
-          delay={0.15}
-          className="mx-auto mt-8 max-w-5xl text-[clamp(2.5rem,7.5vw,5.75rem)] leading-[0.95] font-semibold text-balance"
-        >
-          Rebuild with intention.
-        </SplitReveal>
+
         <LoadSequence delay={0.75}>
           <p className="js-reveal mx-auto mt-7 max-w-2xl text-base leading-relaxed text-ash sm:text-lg" data-load>
             CTRL Z PAUSE! UNDO! REBUILD! A one-gathering for creatives across Africa to rethink their process,challenge
