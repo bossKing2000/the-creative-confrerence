@@ -1,8 +1,8 @@
 import { Button } from '@/components/ui/Button';
 import { Countdown } from '@/components/ui/Countdown';
-import { CtaBackground } from '@/components/ui/CtaBackground';
 import { ArrowUpRight } from '@/components/ui/Icon';
 import { Reveal } from '@/components/ui/Reveal';
+import { SectionBackground } from '@/components/ui/SectionBackground';
 import { SplitReveal } from '@/components/ui/SplitReveal';
 import { StripField } from '@/components/ui/StripField';
 import { event } from '@/data/event';
@@ -10,12 +10,17 @@ import { event } from '@/data/event';
 export function FinalCTA() {
   return (
     <section className="relative isolate overflow-hidden border-t seam">
-      <CtaBackground />
+      <SectionBackground
+        src="/images/background/lower.jpeg"
+        position="50% 40%"
+        grayscale
+        overlay="linear-gradient(to bottom, rgb(11 11 12 / 0.85), rgb(11 11 12 / 0.84) 40%, rgb(11 11 12 / 0.85) 60%, rgb(11 11 12 / 0.85))"
+      />
       <StripField intensity={22} parallax={-70} className="-z-10" />
 
       <div className="shell relative py-28 text-center lg:py-36">
         <Reveal>
-          <p className="font-mono text-xs tracking-[0.2em] text-ash uppercase">
+          <p className="font-mono text-xs tracking-[0.2em] text-silver uppercase">
             {event.dateLabel} · {event.city}
           </p>
 

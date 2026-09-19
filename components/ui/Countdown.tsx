@@ -38,9 +38,7 @@ export function Countdown({ target, className }: CountdownProps) {
             >
               {values[index] ?? '--'}
             </dd>
-            <dt className="mt-1.5 font-mono text-[0.625rem] tracking-[0.16em] text-ash-dim uppercase sm:text-xs">
-              {unit}
-            </dt>
+            <dt className="mt-1.5 font-mono text-[0.625rem] tracking-[0.16em] text-ash uppercase sm:text-xs">{unit}</dt>
           </div>
         ))}
       </dl>
