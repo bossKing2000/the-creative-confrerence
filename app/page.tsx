@@ -63,8 +63,8 @@ export default function Home() {
       <PastEditions />
       <Speakers />
       <Tickets />
-      <Sponsors />
       <Team />
+      <Sponsors />
       <FAQ />
       <FinalCTA />
     </>
