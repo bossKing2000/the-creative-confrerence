@@ -6,10 +6,35 @@ import { Reveal } from '@/components/ui/Reveal';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { sponsors } from '@/data/sponsors';
 import type { Sponsor } from '@/data/sponsors';
+import { variantSet } from '@/lib/image-variants';
 import { cn } from '@/lib/utils';
 
 function Logo({ sponsor }: { sponsor: Sponsor }) {
   const isWide = sponsor.width / sponsor.height >= 2;
+  // Static build-time variants served directly — never through /_next/image,
+  // so no runtime sharp/libvips work happens per request (Render OOM fix).
+  // Unmapped sources keep the previous next/image behavior.
+  const variants = variantSet(sponsor.logo);
+
+  if (variants) {
+    return (
+      <img
+        src={variants.src}
+        srcSet={variants.srcSet}
+        sizes="(min-width: 768px) 192px, 96px"
+        alt={sponsor.name}
+        width={sponsor.width}
+        height={sponsor.height}
+        loading="lazy"
+        decoding="async"
+        className={cn(
+          'w-auto object-contain opacity-100 transition duration-300',
+          'group-hover/logo:opacity-70',
+          isWide ? 'max-h-8 max-w-36 sm:max-h-9 sm:max-w-40' : 'max-h-20 max-w-28 sm:max-h-24 sm:max-w-32',
+        )}
+      />
+    );
+  }
 
   return (
     <Image

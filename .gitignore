@@ -21,6 +21,10 @@ yarn.lock
 /.next/
 /out/
 
+# build-time generated responsive image variants (scripts/generate-image-variants.mjs)
+/public/images/optimized/
+/data/image-variants.json
+
 # production
 /build
 

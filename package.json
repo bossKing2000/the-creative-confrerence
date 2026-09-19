@@ -9,7 +9,9 @@
   ],
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node scripts/generate-image-variants.mjs",
     "build": "next build",
+    "images:variants": "node scripts/generate-image-variants.mjs",
     "start": "next start",
     "format": "prettier --write .",
     "format:check": "prettier --check .",

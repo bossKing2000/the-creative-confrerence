@@ -1,9 +1,8 @@
 'use client';
 
-import Image from 'next/image';
-
 import { Marquee } from '@/components/ui/Marquee';
 import type { ArchivePhoto } from '@/data/event';
+import { variantSet } from '@/lib/image-variants';
 import { useMediaQuery } from '@/lib/media-query';
 
 interface ArchiveGalleryProps {
@@ -17,6 +16,30 @@ const frameBase =
 const frameMobile = 'w-24';
 const frameTablet = 'sm:w-32';
 const frameDesktop = 'lg:w-40 xl:w-48';
+
+/**
+ * Static build-time variants served directly — never through /_next/image,
+ * so no runtime sharp/libvips work happens per request (Render OOM fix).
+ */
+function FrameImage({ photo }: { photo: ArchivePhoto }) {
+  const variants = variantSet(photo.src);
+
+  return (
+    <img
+      src={variants?.src ?? photo.src}
+      srcSet={variants?.srcSet}
+      sizes="(min-width: 1024px) 192px, (min-width: 640px) 160px, 96px"
+      alt={photo.alt}
+      width={photo.width}
+      height={photo.height}
+      loading="lazy"
+      decoding="async"
+      draggable={false}
+      style={{ objectPosition: photo.position ?? '50% 25%' }}
+      className="aspect-[3/4] h-full w-full object-cover"
+    />
+  );
+}
 
 function Row({
   photos,
@@ -45,17 +68,7 @@ function Row({
             aria-label={`${photo.alt} — open the ${year} archive`}
             className={`${frameClass} flex-shrink-0 snap-center`}
           >
-            <Image
-              src={photo.src}
-              alt={photo.alt}
-              width={photo.width}
-              height={photo.height}
-              sizes="(min-width: 1024px) 192px, (min-width: 640px) 160px, 96px"
-              loading="lazy"
-              draggable={false}
-              style={{ objectPosition: photo.position ?? '50% 25%' }}
-              className="aspect-[3/4] h-full w-full object-cover"
-            />
+            <FrameImage photo={photo} />
           </a>
         ))}
       </div>
@@ -73,17 +86,7 @@ function Row({
           aria-label={`${photo.alt} — open the ${year} archive`}
           className={frameClass}
         >
-          <Image
-            src={photo.src}
-            alt={photo.alt}
-            width={photo.width}
-            height={photo.height}
-            sizes="(min-width: 1024px) 192px, (min-width: 640px) 160px, 96px"
-            loading="lazy"
-            draggable={false}
-            style={{ objectPosition: photo.position ?? '50% 25%' }}
-            className="aspect-[3/4] h-full w-full object-cover"
-          />
+          <FrameImage photo={photo} />
         </a>
       ))}
     </Marquee>

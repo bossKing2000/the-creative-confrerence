@@ -1,5 +1,6 @@
 import Image from 'next/image';
 
+import { variantSet } from '@/lib/image-variants';
 import { cn, initialsOf } from '@/lib/utils';
 
 interface AvatarProps {
@@ -22,6 +23,27 @@ function toneFor(seed: string): number {
 
 export function Avatar({ name, photo, seed, pending, className }: AvatarProps) {
   if (photo) {
+    // Static build-time variants served directly — never through /_next/image,
+    // so no runtime sharp/libvips work happens per request (Render OOM fix).
+    // Unmapped sources keep the previous next/image behavior.
+    const variants = variantSet(photo);
+
+    if (variants) {
+      return (
+        <img
+          src={variants.src}
+          srcSet={variants.srcSet}
+          sizes="(min-width: 1024px) 352px, (min-width: 640px) 288px, 336px"
+          alt={name}
+          width={480}
+          height={600}
+          loading="lazy"
+          decoding="async"
+          className={cn('h-full w-full object-cover', className)}
+        />
+      );
+    }
+
     return (
       <Image
         src={photo}
