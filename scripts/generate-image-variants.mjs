@@ -31,6 +31,7 @@ const SOURCE_DIRS = [
   join(PUBLIC, 'images', 'editions'),
   join(PUBLIC, 'images', 'team'),
   join(PUBLIC, 'images', 'sponsors'),
+  join(PUBLIC, 'images', 'background'),
 ];
 
 const IMAGE_EXTS = new Set(['.jpg', '.jpeg', '.png', '.webp']);

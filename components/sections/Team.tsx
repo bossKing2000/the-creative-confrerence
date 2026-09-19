@@ -36,10 +36,14 @@ export function Team() {
         gsap.set(cards, { rotate: 0 });
 
         Flip.from(state, {
-          duration: 0.9,
-          ease: 'power3.inOut',
+          // Tuned for immediacy: power3.out moves from the first frame
+          // (inOut's slow start read as scroll lag), with a shorter run
+          // and tighter stagger. Mechanics (absolute, minHeight lock)
+          // are untouched.
+          duration: 0.6,
+          ease: 'power3.out',
           absolute: true,
-          stagger: 0.055,
+          stagger: 0.04,
           onComplete: () => {
             el.style.minHeight = '';
           },

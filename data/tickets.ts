@@ -21,6 +21,18 @@ export interface Ticket {
 
 export const tickets: Ticket[] = [
   {
+    id: 'student',
+    tier: 'Student',
+    name: 'Student',
+    price: '₦1,000',
+    suffix: '/single entry',
+    features: [
+      'For students ready to step into the creative community. Come for the ideas, meet your people, and leave with new possibilities.',
+    ],
+    href: 'https://app.eventpadi.com/e/tcc26/ep-student-lgn9y/checkout',
+    cta: 'Get this pass',
+  },
+  {
     id: 'regular',
     tier: 'Regular',
     name: 'Regular',
@@ -46,23 +58,11 @@ export const tickets: Ticket[] = [
     featured: true,
   },
   {
-    id: 'student',
-    tier: 'Student',
-    name: 'Student',
-    price: '₦1,000',
-    suffix: '/single entry',
-    features: [
-      'For students ready to step into the creative community. Come for the ideas, meet your people, and leave with new possibilities.',
-    ],
-    href: 'https://app.eventpadi.com/e/tcc26/ep-student-lgn9y/checkout',
-    cta: 'Get this pass',
-  },
-  {
-    id: 'group-of-4',
-    tier: 'Group of 4',
-    name: 'Group of 4',
+    id: 'group-of-6',
+    tier: 'Group of 6',
+    name: 'Group of 6',
     price: '₦6,000',
-    suffix: '/4 people',
+    suffix: '/6 people',
     features: [
       'Good ideas are better shared. Bring your team, friends, or creative circle and experience TCC26 together.',
     ],

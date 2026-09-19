@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/Button';
 import { Countdown } from '@/components/ui/Countdown';
+import { CtaBackground } from '@/components/ui/CtaBackground';
 import { ArrowUpRight } from '@/components/ui/Icon';
 import { Reveal } from '@/components/ui/Reveal';
 import { SplitReveal } from '@/components/ui/SplitReveal';
@@ -9,6 +10,7 @@ import { event } from '@/data/event';
 export function FinalCTA() {
   return (
     <section className="relative isolate overflow-hidden border-t seam">
+      <CtaBackground />
       <StripField intensity={22} parallax={-70} className="-z-10" />
 
       <div className="shell relative py-28 text-center lg:py-36">

@@ -53,6 +53,45 @@
   }
 }
 
+/* FinalCTA photographic crossfade: 13 slides × 7s slots = 91s loop.
+   Each slide fades in over the first 1.6s of its slot, holds, and hands off
+   to the next slide during the following 1.6s. Percentages below encode
+   1.6/91, 7/91 and 8.6/91 — keep them in sync with CtaBackground's SLOT_S
+   and slide count if the background set ever changes. */
+@keyframes cta-xfade {
+  0% {
+    opacity: 0;
+  }
+  1.76% {
+    opacity: 1;
+  }
+  7.69% {
+    opacity: 1;
+  }
+  9.45% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Base state (and the reduced-motion rendering): only the first slide shows,
+   so first paint and no-preference-off users get a static photograph. */
+.cta-bg-slide {
+  opacity: 0;
+}
+
+.cta-bg-slide:first-child {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .cta-bg-slide {
+    animation: cta-xfade 91s linear infinite backwards;
+  }
+}
+
 /* Marquee pause on interaction. Explicit selectors (not stacked Tailwind
    variants) so hover and keyboard focus reliably still the drift. Scoped to
    no-preference; reduced motion kills the underlying animations globally. */
