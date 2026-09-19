@@ -20,6 +20,8 @@ export interface VariantSet {
   src: string;
   /** Width-described candidates for the browser to choose from. */
   srcSet: string;
+  /** Cheapest variant URL — used for lightweight retry probes. */
+  smallest: string;
 }
 
 /**
@@ -32,5 +34,10 @@ export function variantSet(src: string): VariantSet | null {
   if (!entry || entry.widths.length === 0) return null;
 
   const urls = entry.widths.map(width => `${variantUrl(src, width, entry.ext)} ${width}w`);
-  return { src: urls[urls.length - 1].split(' ')[0], srcSet: urls.join(', ') };
+  const smallestWidth = Math.min(...entry.widths);
+  return {
+    src: urls[urls.length - 1].split(' ')[0],
+    srcSet: urls.join(', '),
+    smallest: variantUrl(src, smallestWidth, entry.ext),
+  };
 }
