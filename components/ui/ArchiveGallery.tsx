@@ -8,7 +8,6 @@ import { useMediaQuery } from '@/lib/media-query';
 interface ArchiveGalleryProps {
   photos: ArchivePhoto[];
   year: string;
-  href: string;
 }
 
 const frameBase =
@@ -41,17 +40,7 @@ function FrameImage({ photo }: { photo: ArchivePhoto }) {
   );
 }
 
-function Row({
-  photos,
-  year,
-  href,
-  direction,
-}: {
-  photos: ArchivePhoto[];
-  year: string;
-  href: string;
-  direction: 'left' | 'right';
-}) {
+function Row({ photos, direction }: { photos: ArchivePhoto[]; direction: 'left' | 'right' }) {
   const prefersReduced = useMediaQuery('(prefers-reduced-motion: reduce)');
   const speed = prefersReduced ? false : 'slow';
   const frameClass = `${frameBase} ${frameMobile} ${frameTablet} ${frameDesktop}`;
@@ -60,46 +49,32 @@ function Row({
     return (
       <div className="flex gap-2 overflow-x-auto pb-2 -mx-2 px-2 snap-x snap-mandatory">
         {photos.map(photo => (
-          <a
-            key={photo.src}
-            href={href}
-            target="_blank"
-            rel="noreferrer"
-            aria-label={`${photo.alt} — open the ${year} archive`}
-            className={`${frameClass} flex-shrink-0 snap-center`}
-          >
+          <div key={photo.src} className={`${frameClass} flex-shrink-0 snap-center`}>
             <FrameImage photo={photo} />
-          </a>
+          </div>
         ))}
       </div>
     );
   }
 
   return (
-    <Marquee speed={speed} direction={direction} className="py-2" disableOnMobile>
+    <Marquee speed={speed} direction={direction} className="py-2 marquee-rolling" disableOnMobile>
       {photos.map(photo => (
-        <a
-          key={photo.src}
-          href={href}
-          target="_blank"
-          rel="noreferrer"
-          aria-label={`${photo.alt} — open the ${year} archive`}
-          className={frameClass}
-        >
+        <div key={photo.src} className={frameClass}>
           <FrameImage photo={photo} />
-        </a>
+        </div>
       ))}
     </Marquee>
   );
 }
 
-export function ArchiveGallery({ photos, year, href }: ArchiveGalleryProps) {
+export function ArchiveGallery({ photos, year }: ArchiveGalleryProps) {
   if (photos.length === 0) return null;
 
   return (
     <div key={year} className="archive-film archive-lead mt-10 space-y-2 lg:mt-12 lg:space-y-3">
-      <Row photos={photos} year={year} href={href} direction="left" />
-      <Row photos={[...photos].reverse()} year={year} href={href} direction="right" />
+      <Row photos={photos} direction="left" />
+      <Row photos={[...photos].reverse()} direction="right" />
     </div>
   );
 }

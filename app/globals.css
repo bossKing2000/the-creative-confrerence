@@ -58,10 +58,18 @@
    no-preference; reduced motion kills the underlying animations globally. */
 @media (prefers-reduced-motion: no-preference) {
   .marquee:hover > .marquee-track,
-  .marquee:focus-within > .marquee-track,
-  .archive-film:hover .marquee-track,
-  .archive-film:focus-within .marquee-track {
+  .marquee:focus-within > .marquee-track {
     animation-play-state: paused;
+  }
+}
+
+/* Archive rows roll continuously, even under pointer hover. The override
+   below wins over the generic pause rule above by source order (equal
+   specificity). Keyboard-focus pause is intentionally preserved for
+   accessibility, as is the reduced-motion kill-switch further below. */
+@media (prefers-reduced-motion: no-preference) {
+  .marquee-rolling:hover > .marquee-track {
+    animation-play-state: running;
   }
 }
 

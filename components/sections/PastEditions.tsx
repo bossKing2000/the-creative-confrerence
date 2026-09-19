@@ -144,7 +144,7 @@ export function PastEditions() {
 
             {/* Full-bleed: no `.shell`, no card padding — the marquee tracks
                 run to the viewport edges. */}
-            <ArchiveGallery photos={edition.photos} year={edition.year} href={edition.href} />
+            <ArchiveGallery photos={edition.photos} year={edition.year} />
           </div>
         </div>
       </Reveal>
