@@ -8,14 +8,8 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: path.resolve(process.cwd()),
   },
-  images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'lh3.googleusercontent.com',
-      },
-    ],
-  },
+  // Local public assets only — archive photography now lives under
+  // public/images/editions/<year>/, so no remote image patterns are needed.
 };
 
 export default nextConfig;

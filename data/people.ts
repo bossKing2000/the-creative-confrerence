@@ -11,37 +11,60 @@ export interface Person {
   socials?: SocialLink[];
 }
 
-export const speakers: Person[] = [];
+export const speakers: Person[] = [
+  {
+    id: 'oyeleye-ogunsanya',
+    name: 'Oyeleye Ogunsanya',
+    role: 'Lead Designer',
+    company: 'Risevest',
+    socials: [],
+  },
+  {
+    id: 'tola-alabi',
+    name: 'Tola Alabi',
+    role: 'Design Coach & Speaker',
+    socials: [],
+  },
+  {
+    id: 'oluwabusayo-charles',
+    name: 'Oluwabusayo A. Charles',
+    role: 'Speaker',
+    socials: [],
+  },
+  { id: 'slot-4', name: 'To be announced', role: 'Keynote', pending: true },
+  { id: 'slot-5', name: 'To be announced', role: 'Workshop lead', pending: true },
+  { id: 'slot-6', name: 'To be announced', role: 'Panel', pending: true },
+];
 
 export const team: Person[] = [
   {
-    id: 'dammy',
-    name: 'Dammy',
+    id: 'tigbemiga',
+    name: 'Tigbemiga',
     role: 'Organising team',
-    photo: '/images/team/Dammy.jpg',
+    photo: '/images/team/tigbemiga.png',
   },
   {
     id: 'damola',
     name: 'Damola',
     role: 'Organising team',
-    photo: '/images/team/Damola.jpg',
+    photo: '/images/team/damola.png',
   },
   {
-    id: 'peter',
-    name: 'Peter',
+    id: 'dammy',
+    name: 'Dammy',
     role: 'Organising team',
-    photo: '/images/team/Peter.jpg',
+    photo: '/images/team/dammy.png',
   },
   {
     id: 'segun',
     name: 'Segun',
     role: 'Organising team',
-    photo: '/images/team/Segun.jpg',
+    photo: '/images/team/seegun.png',
   },
   {
-    id: 'tigbemiga',
-    name: 'Tigbemiga',
+    id: 'peter',
+    name: 'Peter',
     role: 'Organising team',
-    photo: '/images/team/Tigbemiga.jpg',
+    photo: '/images/team/petrock.png',
   },
 ];

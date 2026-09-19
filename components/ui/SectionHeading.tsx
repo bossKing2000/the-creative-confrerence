@@ -27,7 +27,7 @@ export function SectionHeading({ eyebrow, title, lede, align = 'start', classNam
         </p>
       </Reveal>
 
-      <SplitReveal as="h2" className="mt-5 text-4xl leading-[1.05] sm:text-5xl lg:text-6xl">
+      <SplitReveal as="h2" className="mt-5 text-4xl leading-[1.05] sm:text-5xl lg:text-5xl">
         {title}
       </SplitReveal>
 

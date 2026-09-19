@@ -146,7 +146,7 @@ export function Navbar() {
               <SectionLink
                 href={link.href}
                 onClick={closeMenu}
-                className="flex items-center justify-between py-4 font-display text-xl text-bone"
+                className="flex items-center justify-between py-4 font-display text-lg text-bone"
               >
                 {link.label}
                 <ArrowUpRight className="size-5 text-ash-dim" />

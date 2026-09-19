@@ -60,12 +60,12 @@ export default function Home() {
       <Hero />
       <Ticker />
       <About />
-      <PastEditions />
       <Speakers />
+      <Tickets />
       <Sponsors />
       <Team />
+      <PastEditions />
       <FAQ />
-      <Tickets />
       <FinalCTA />
     </>
   );
