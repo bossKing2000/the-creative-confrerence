@@ -13,8 +13,7 @@ export function FinalCTA() {
       <SectionBackground
         src="/images/background/lower.jpeg"
         position="50% 40%"
-        grayscale
-        overlay="linear-gradient(to bottom, rgb(11 11 12 / 0.85), rgb(11 11 12 / 0.84) 40%, rgb(11 11 12 / 0.85) 60%, rgb(11 11 12 / 0.85))"
+        overlay="linear-gradient(to bottom, rgb(11 11 12 / 0.58), rgb(11 11 12 / 0.40) 40%, rgb(11 11 12 / 0.44) 60%, rgb(11 11 12 / 0.58))"
       />
       <StripField intensity={22} parallax={-70} className="-z-10" />
 

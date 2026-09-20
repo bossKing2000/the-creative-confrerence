@@ -53,6 +53,45 @@
   }
 }
 
+/* Hero photographic crossfade: 4 slides × 6s slots = 24s loop.
+   Each slide fades in over the first 1.5s of its slot, holds, and hands off
+   to the next slide during the following 1.5s. Percentages below encode
+   1.5/24, 6/24 and 7.5/24 — keep them in sync with HeroBackground's SLOT_S
+   and slide count if the rotation set ever changes. */
+@keyframes hero-xfade {
+  0% {
+    opacity: 0;
+  }
+  6.25% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 1;
+  }
+  31.25% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Base state (and the reduced-motion rendering): only the first slide shows,
+   so first paint and no-preference-off users get a static photograph. */
+.hero-bg-slide {
+  opacity: 0;
+}
+
+.hero-bg-slide:first-child {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-bg-slide {
+    animation: hero-xfade 24s linear infinite backwards;
+  }
+}
+
 /* Marquee pause on interaction. Explicit selectors (not stacked Tailwind
    variants) so hover and keyboard focus reliably still the drift. Scoped to
    no-preference; reduced motion kills the underlying animations globally. */

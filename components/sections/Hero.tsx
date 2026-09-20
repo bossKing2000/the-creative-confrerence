@@ -1,8 +1,8 @@
 import { Button } from '@/components/ui/Button';
 import { Countdown } from '@/components/ui/Countdown';
+import { HeroBackground } from '@/components/ui/HeroBackground';
 import { ArrowUpRight, Calendar, MapPin } from '@/components/ui/Icon';
 import { LoadSequence } from '@/components/ui/LoadSequence';
-import { SectionBackground } from '@/components/ui/SectionBackground';
 import { SplitReveal } from '@/components/ui/SplitReveal';
 import { StripField } from '@/components/ui/StripField';
 import { event } from '@/data/event';
@@ -10,12 +10,7 @@ import { event } from '@/data/event';
 export function Hero() {
   return (
     <section className="relative isolate flex min-h-[100svh] flex-col justify-center overflow-hidden pt-28 pb-16">
-      <SectionBackground
-        src="/images/background/upper.jpg"
-        eager
-        grayscale
-        overlay="linear-gradient(to bottom, rgb(11 11 12 / 0.85), rgb(11 11 12 / 0.84) 40%, rgb(11 11 12 / 0.85) 60%, rgb(11 11 12 / 0.85))"
-      />
+      <HeroBackground overlay="linear-gradient(to bottom, rgb(11 11 12 / 0.58), rgb(11 11 12 / 0.40) 40%, rgb(11 11 12 / 0.44) 60%, rgb(11 11 12 / 0.58))" />
       <StripField intensity={20} parallax={70} className="-z-10" />
 
       <div className="shell relative w-full text-center">
