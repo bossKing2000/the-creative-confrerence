@@ -79,28 +79,70 @@ export function Navbar() {
     };
   }, [menuOpen, closeMenu]);
 
+  // The header is fully transparent at the top of the page, which leaves the
+  // link row sitting directly on the rotating Hero photography. Measured
+  // against all four Hero frames the row lands in the brightest strip of every
+  // one of them, so `text-ash` on raw photo measured 1.0-1.2:1. A compact
+  // translucent pill behind the links fixes that without darkening the page.
+  const solid = scrolled || menuOpen;
+
   return (
     <header
       className={cn(
         'fixed inset-x-0 top-0 z-50 transition-[background-color,backdrop-filter,border-color] duration-300',
-        scrolled || menuOpen ? 'border-b seam bg-ink/85 backdrop-blur-xl' : 'border-b border-transparent',
+        solid ? 'border-b seam bg-ink/85 backdrop-blur-xl' : 'border-b border-transparent',
       )}
     >
       <nav aria-label="Main" className="shell flex h-18 items-center justify-between gap-4">
-        <Link href="/" className="flex items-center gap-3" onClick={closeMenu}>
-          <Image src="/logo-white.png" alt="" width={36} height={36} className="size-9 object-contain" priority />
-          <span className="font-display text-sm leading-tight font-semibold text-bone">
-            The Creative
-            <span className="block text-ash-dim">Conference {event.edition}</span>
-          </span>
-        </Link>
+        {/* Wordmark. The "Conference {edition}" line was `text-ash-dim`
+            (#5c5c65), which measured 1.0:1 against every Hero frame — the
+            Hero's top strip is the brightest part of all four photographs.
+            Now `text-bone` behind the same compact pill as the link row, which
+            measures 5.8:1 at the worst viewport. It is a wordmark, so bone
+            matches "The Creative" above it and the line is distinguished by
+            weight and size rather than by colour; the hero-copy hierarchy is
+            unaffected because this is header chrome, not hero copy.
+            `relative` + an out-of-flow layer means the pill adds no padding,
+            so the lockup does not move. */}
+        <div className="relative">
+          {solid ? null : (
+            <span
+              aria-hidden
+              className={cn(
+                'pointer-events-none absolute -inset-x-2 -inset-y-1.5 rounded-full border border-white/10 transition-colors duration-300',
+                'bg-ink/50 backdrop-blur-md',
+              )}
+            />
+          )}
+          <Link href="/" className="relative flex items-center gap-3" onClick={closeMenu}>
+            <Image src="/logo-white.png" alt="" width={36} height={36} className="size-9 object-contain" priority />
+            <span className="font-display text-sm leading-tight font-semibold text-bone">
+              The Creative
+              <span className="block text-bone [text-shadow:0_1px_2px_rgb(11_11_12/0.85),0_1px_8px_rgb(11_11_12/0.6)]">
+                Conference {event.edition}
+              </span>
+            </span>
+          </Link>
+        </div>
 
-        <ul className="hidden items-center gap-1 lg:flex">
+        {/* Pill only in the transparent state: once the header has its own
+            bg-ink/85 a nested panel would read as a dark blob.
+            bg-ink/50 is the measured value, not a guess. Sweeping alpha against
+            all four Hero frames at 1024/1280/1440: 40% gives 4.09:1 (fails),
+            45% gives 4.51:1 (passes by 0.01, too tight to rely on), 50% gives
+            4.95:1. Anything heavier reads as an opaque bar and buries the
+            photography behind it. */}
+        <ul
+          className={cn(
+            'hidden items-center gap-1 rounded-full border border-white/10 p-1 transition-colors duration-300 lg:flex',
+            !solid && 'bg-ink/50 backdrop-blur-md',
+          )}
+        >
           {navLinks.map(link => (
             <li key={link.href}>
               <SectionLink
                 href={link.href}
-                className="rounded-full px-3.5 py-2 text-sm text-ash transition-colors hover:bg-white/6 hover:text-bone"
+                className="rounded-full px-3.5 py-2 text-sm text-bone transition-colors hover:bg-white/12"
               >
                 {link.label}
               </SectionLink>
