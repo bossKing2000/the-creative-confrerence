@@ -4,33 +4,39 @@ import { ArrowUpRight } from '@/components/ui/Icon';
 import { Reveal } from '@/components/ui/Reveal';
 import { SectionBackground } from '@/components/ui/SectionBackground';
 import { SplitReveal } from '@/components/ui/SplitReveal';
-import { StripField } from '@/components/ui/StripField';
 import { event } from '@/data/event';
+
+/**
+ * Single uniform black overlay for the FinalCTA image layer. Same 0.82 as the
+ * Hero, swept alongside it — the stage, screen and seating stay visible
+ * underneath while the heading dominates. The `StripField` that used to sit
+ * here (twelve vertical seam lines plus gradient strips) is gone with it; the
+ * brief rejects line overlays.
+ */
+const CTA_OVERLAY = 'rgb(11 11 12 / 0.82)';
 
 export function FinalCTA() {
   return (
     <section className="relative isolate overflow-hidden border-t seam">
-      <SectionBackground
-        src="/images/background/lower.jpeg"
-        position="50% 40%"
-        overlay="linear-gradient(to bottom, rgb(11 11 12 / 0.58), rgb(11 11 12 / 0.40) 40%, rgb(11 11 12 / 0.44) 60%, rgb(11 11 12 / 0.58))"
-      />
-      <StripField intensity={22} parallax={-70} className="-z-10" />
+      <SectionBackground src="/images/background/lower.jpeg" position="50% 40%" overlay={CTA_OVERLAY} />
 
       <div className="shell relative py-28 text-center lg:py-36">
         <Reveal>
-          <p className="font-mono text-xs tracking-[0.2em] text-silver uppercase">
+          <p className="font-mono text-xs tracking-[0.2em] text-white uppercase">
             {event.dateLabel} · {event.city}
           </p>
 
           <SplitReveal
             as="h2"
-            className="mx-auto mt-6 max-w-4xl text-[clamp(2.25rem,6.5vw,4.5rem)] leading-none font-semibold"
+            className="mx-auto mt-6 max-w-4xl text-[clamp(2.25rem,6.5vw,4.5rem)] leading-none font-semibold text-white"
           >
             The room fills up. Be in it.
           </SplitReveal>
 
-          <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-ash sm:text-lg">
+          {/* Pure white per the final direction — heading, date/venue and copy
+              all render `#FFFFFF`, with hierarchy carried by size and weight.
+              No opacity, blend, shadow or panel anywhere on this text. */}
+          <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-white sm:text-lg">
             Every edition has sold out before the door, and the earliest tickets are always the cheapest. Book now and
             hear the lineup before it goes public.
           </p>

@@ -114,7 +114,11 @@ export function PastEditions() {
                   })}
                 </div>
 
-                <div className="rounded-2xl border seam bg-char/60 p-7 lg:col-span-8 lg:p-10">
+                {/* Mobile shows years + scrolling images only; the descriptive
+                    card (title, summary, highlights, archive CTA) is desktop
+                    only. `hidden` removes it from layout entirely below `lg`,
+                    so no empty space remains between the tabs and the gallery. */}
+                <div className="hidden rounded-2xl border seam bg-char/60 p-7 lg:col-span-8 lg:block lg:p-10">
                   <h3 className="font-display text-2xl font-semibold text-bone lg:text-3xl">
                     {edition.year} · {edition.title}
                   </h3>

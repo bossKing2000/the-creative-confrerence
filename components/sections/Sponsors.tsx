@@ -54,7 +54,10 @@ function Logo({ sponsor }: { sponsor: Sponsor }) {
 
 export function Sponsors() {
   return (
-    <section id="partners" className="shell py-24 lg:py-32 lg:pt-0">
+    <section id="partners" className="shell py-24 lg:py-32">
+      {/* Top padding matches the neighbouring sections (py-24 lg:py-32 like
+          Team and FAQ). The previous lg:pt-0 left the heading flush against
+          Team on desktop; nothing else in this section changed. */}
       <SectionHeading
         eyebrow="Partners"
         title="Backed by people who build here"
