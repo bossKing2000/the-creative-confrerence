@@ -61,12 +61,14 @@ function Row({
   onFailure,
   onRecovered,
   direction,
+  disableOnMobile = false,
 }: {
   photos: ArchivePhoto[];
   visible: (src: string) => boolean;
   onFailure: (src: string) => void;
   onRecovered: (src: string) => void;
   direction: 'left' | 'right';
+  disableOnMobile?: boolean;
 }) {
   const prefersReduced = useMediaQuery('(prefers-reduced-motion: reduce)');
   const speed = prefersReduced ? false : 'slow';
@@ -86,7 +88,7 @@ function Row({
   }
 
   return (
-    <Marquee speed={speed} direction={direction} className="py-2 marquee-rolling" disableOnMobile>
+    <Marquee speed={speed} direction={direction} className="py-2 marquee-rolling" disableOnMobile={disableOnMobile}>
       {shown.map(photo => (
         <div key={photo.src} className={frameClass}>
           <FrameImage photo={photo} onFailure={onFailure} onRecovered={onRecovered} />

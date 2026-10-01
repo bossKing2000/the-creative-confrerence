@@ -27,7 +27,7 @@ const MOBILE_QUERY = '(max-width: 767px)';
  * gain, so it was not chosen. Faces, clothing, room and window light all stay
  * visible underneath.
  */
-const OVERLAY_ALPHA = 0.82;
+const OVERLAY_ALPHA = 0.8;
 
 interface Slide {
   /** Landscape frame, served at >= 768px. */

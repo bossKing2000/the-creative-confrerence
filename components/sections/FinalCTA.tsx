@@ -13,7 +13,7 @@ import { event } from '@/data/event';
  * here (twelve vertical seam lines plus gradient strips) is gone with it; the
  * brief rejects line overlays.
  */
-const CTA_OVERLAY = 'rgb(11 11 12 / 0.82)';
+const CTA_OVERLAY = 'rgb(11 11 12 / 0.80)';
 
 export function FinalCTA() {
   return (
