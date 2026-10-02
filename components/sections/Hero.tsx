@@ -43,9 +43,17 @@ export function Hero() {
           as="h1"
           trigger="load"
           delay={0.15}
-          className="mx-auto mt-8 max-w-7xl text-[clamp(2.5rem,5vw,4.25rem)] leading-[0.95] font-semibold text-pretty text-white max-[431px]:mt-6 max-[431px]:text-[2.125rem] max-[431px]:leading-[1.02] max-[431px]:text-balance"
+          className="mx-auto mt-8 max-w-7xl text-[clamp(2.5rem,5vw,4.25rem)] leading-[0.95] font-semibold text-pretty text-white max-[431px]:mt-6 max-[431px]:text-[2.125rem] max-[431px]:leading-[1.02] max-[431px]:text-balance hidden lg:block"
         >
           Pause the noise. Undo the defaults. Rebuild with intention.
+        </SplitReveal>
+        <SplitReveal
+          as="h1"
+          trigger="load"
+          delay={0.15}
+          className="mx-auto mt-8 max-w-7xl text-[clamp(2.5rem,5vw,4.25rem)] leading-[0.95] font-semibold text-pretty text-white max-[431px]:mt-6 max-[431px]:text-[2.125rem] max-[431px]:leading-[1.02] max-[431px]:text-balance block lg:hidden"
+        >
+          Undo the limits. Build what lasts.
         </SplitReveal>
 
         <LoadSequence delay={0.75}>
